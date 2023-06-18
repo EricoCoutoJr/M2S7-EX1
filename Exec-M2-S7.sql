@@ -79,3 +79,12 @@ join Venda V on U.id_usuario = V.id_usuario
 where EXTRACT(MONTH from V.dt_compra) = 11 
 group by U.id_usuario, U.nome_usuario
 order by valor_total_gasto desc;
+
+-- Exercício 8
+select U.id, U.nome, SUM(V.valor_passagem) as valor_total_gasto
+from Usuario U
+join Reserva R on U.id = R.id_usuario
+join Viagem V on R.id_viagem = V.id
+where EXTRACT(MONTH from V.data_viagem) = 7 -- Filtra pelo mês de julho
+group by U.id, U.nome
+order by valor_total_gasto desc;
