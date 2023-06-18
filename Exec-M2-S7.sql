@@ -3,7 +3,7 @@ create table usuarios (
 	nome varchar(40),
 	cpf varchar(11),
 	rg varchar(20),
-	data_nascimento date (DATEDIFF(YEAR, data_nascimento, GETDATE()) >= 18),
+	data_nascimento date CHECK (DATE_PART('year', age(current_date, data_nascimento)) >= 18),
 	login varchar(100),
 	senha varchar(50)
 );
