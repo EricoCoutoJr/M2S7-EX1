@@ -4,7 +4,8 @@ create table usuarios (
 	cpf varchar(11),
 	rg varchar(20),
 	data_nascimento date CHECK (DATE_PART('year', age(current_date, data_nascimento)) >= 18),
-	login varchar(100),
+	email varchar(100),
+	login varchar(100) unique,
 	senha varchar(50)
 );
 
