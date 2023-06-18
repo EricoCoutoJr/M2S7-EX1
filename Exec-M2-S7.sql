@@ -71,3 +71,11 @@ having SUM(Cidade.populacao) < (
     where Pais.nome <> 'Espanha'
     group by Pais.nome
 )
+
+-- Exercício 7 -- Filtra pelo mês de novembro (Black Friday)
+select U.nome_usuario, SUM(V.valor_produto * V.quantidade_produto) as valor_total_gasto
+from Usuario U
+join Venda V on U.id_usuario = V.id_usuario
+where EXTRACT(MONTH from V.dt_compra) = 11 
+group by U.id_usuario, U.nome_usuario
+order by valor_total_gasto desc;
