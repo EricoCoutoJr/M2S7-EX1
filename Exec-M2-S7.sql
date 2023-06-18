@@ -55,3 +55,19 @@ where Cidade.capital = 'True'
         Estado.nome like 'San%' or
         Estado.nome like 'Saint%')
 ORDER BY Pais.nome, Estado.nome, Cidade.nome;
+
+-- Exercicio 6
+select Pais.nome, SUM(Cidade.populacao) as populacao_total
+from Pais
+join Estado on Pais.id_pais = Estado.id_pais
+join Cidade on Estado.id_estado = Cidade.id_estado
+where Pais.nome = 'Espanha'
+group by Pais.nome
+having SUM(Cidade.populacao) < (
+    select SUM(Cidade.populacao)
+    from Pais
+    join Estado ON Pais.id_pais = Estado.id_pais
+    join Cidade ON Estado.id_estado = Cidade.id_estado
+    where Pais.nome <> 'Espanha'
+    group by Pais.nome
+)
